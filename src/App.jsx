@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import LoginPage from './components/LoginPage';
 import React from 'react';
 import { AuthContext } from './providers/Auth';
-
+import CadPage from './components/CadPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   const [user , setUser] = useState({
     name:"",
@@ -14,7 +15,12 @@ function App() {
 
   return (
       <AuthContext.Provider value={{user, setUser}}>
-        <LoginPage/>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<LoginPage/>}/>
+            <Route path='/cadastro' element={<CadPage/>}/>
+          </Routes>
+        </BrowserRouter>
       </AuthContext.Provider>
   )
 }

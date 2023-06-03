@@ -4,29 +4,31 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../providers/Auth';
 import { Link } from 'react-router-dom';
 
-function LoginPage(){
+function CadPage(){
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
     
-    function Login(event){
+    function Cadastrar(event){
         event.preventDefault();
     }
     return(
         <SCLoginPage>
             <SCLogo src={Logo}/>
-                <SCForm onSubmit={Login}>
+                <SCForm onSubmit={Cadastrar}>
                     <input type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
                     <input type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,senha: e.target.value})} ></input>
-                    <SCEntrarButton type='submit'>Entrar</SCEntrarButton>
-                </SCForm>
-            <Link to='/cadastro'>     
-                <SCLinkCadastro>Não tem uma conta? Cadastre-se!</SCLinkCadastro>
+                    <input type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,nome: e.target.value})}></input>
+                    <input type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,foto: e.target.value})}></input>
+                    <SCEntrarButton type='submit'>Cadastrar</SCEntrarButton>
+                </SCForm> 
+            <Link to='/'>    
+                <SCLinkCadastro>Já tem uma conta? Faça login!</SCLinkCadastro>
             </Link>
        </SCLoginPage>
     )
 }
 
-export default LoginPage;
+export default CadPage;
 
 const SCForm = styled.form`
     width:303px;
