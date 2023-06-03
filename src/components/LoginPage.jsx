@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import Logo from './assets/logo.svg';
-import React, { useContext , useState } from 'react';
+import React, { useContext , useState , useEffect} from 'react';
 import { AuthContext } from '../providers/Auth';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BeatLoader } from 'react-spinners';
 
 function LoginPage(){
     const {user, setUser} = useContext(AuthContext);
@@ -12,8 +13,8 @@ function LoginPage(){
     const navigate = useNavigate();
     
     function Login(event){
-        event.preventDefault();
         setPostin(true);
+        event.preventDefault();
         const postUser = {email: user.email , password: user.password }
         const postURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
         const promise = axios.post(postURL, postUser);
@@ -25,6 +26,7 @@ function LoginPage(){
         promise.then((response)=>{
             setUser(response.data);
             console.log(user);
+            setPostin(false);
             navigate('/hoje');
 
         });
@@ -35,7 +37,9 @@ function LoginPage(){
                 <SCForm onSubmit={Login}>
                     <input data-test="email-input" disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
                     <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
-                    <SCEntrarButton data-test="login-btn" disabled={postin} type='submit'>Entrar</SCEntrarButton>
+                    <SCEntrarButton data-test="login-btn" disabled={postin} type='submit'>
+                        {postin ? <BeatLoader color='#FFFFFF'/> : 'Entrar'}
+                    </SCEntrarButton>
                 </SCForm>
             <Link data-test="signup-link" to='/cadastro'>     
                 <SCLinkCadastro>Não tem uma conta? Cadastre-se!</SCLinkCadastro>

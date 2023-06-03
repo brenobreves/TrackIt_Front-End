@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import Logo from './assets/logo.svg';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState , useEffect} from 'react';
 import { AuthContext } from '../providers/Auth';
 import { Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { BeatLoader } from 'react-spinners';
 
 function CadPage(){
     const {user, setUser} = useContext(AuthContext);
@@ -12,8 +13,8 @@ function CadPage(){
     const navigate = useNavigate();
 
     function Cadastrar(event){
-        event.preventDefault();
         setPostin(true);
+        event.preventDefault();
         const postURL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
         const promise = axios.post(postURL, user);
         promise.catch((response)=>{
@@ -22,6 +23,7 @@ function CadPage(){
             setPostin(false);
         });
         promise.then(()=>{
+            setPostin(false);
             navigate('/');
         });
     }
@@ -33,7 +35,9 @@ function CadPage(){
                     <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
                     <input data-test="user-name-input" disabled={postin} type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,name: e.target.value})}></input>
                     <input data-test="user-image-input" disabled={postin} type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,image: e.target.value})}></input>
-                    <SCEntrarButton data-test="signup-btn" disabled={postin} type='submit'>Cadastrar</SCEntrarButton>
+                    <SCEntrarButton data-test="signup-btn" disabled={postin} type='submit'>
+                        {postin ? <BeatLoader color='#FFFFFF'/> : 'Cadastrar'}
+                    </SCEntrarButton>
                 </SCForm> 
             <Link data-test="login-link" to='/'>    
                 <SCLinkCadastro>Já tem uma conta? Faça login!</SCLinkCadastro>

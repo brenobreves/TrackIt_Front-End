@@ -7,6 +7,7 @@ import React from 'react';
 import { AuthContext } from './providers/Auth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import Header from './components/Header';
 function App() {
   axios.defaults.headers.common['Authorization'] = '9maaDDkKFQ1saSPY3udlpWmT';
   const [user , setUser] = useState({
@@ -15,14 +16,16 @@ function App() {
     password:"" ,
     image:""
   })
+  const [showHeader, setShowHeader] = useState(false);
 
   return (
       <AuthContext.Provider value={{user, setUser}}>
         <BrowserRouter>
+        {showHeader && <Header/>}
           <Routes>
             <Route path='/' element={<LoginPage/>}/>
             <Route path='/cadastro' element={<CadPage/>}/>
-            <Route path='/hoje' element={<HojePage/>}/>
+            <Route path='/hoje' element={<HojePage setShowHeader={setShowHeader}/>}/>
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
