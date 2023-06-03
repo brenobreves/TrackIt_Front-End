@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 import Logo from './assets/logo.svg';
-import React from 'react';
-import { useAuth } from '../providers/Auth';
+import React, { useContext } from 'react';
+import { AuthContext } from '../providers/Auth';
 
 function LoginPage(){
+    const {user, setUser} = useContext(AuthContext);
+    console.log(user);
     
-    const {user , setUser} = useAuth();
-    
-    
-    function Login(){
-        
+    function Login(event){
+        event.preventDefault();
     }
     return(
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Login}>
-                    <input type='text' placeholder='email' required onChange={(e) => setUser({email: e.target.value})}></input>
-                    <input type='password' placeholder='senha' required onChange={(e) => setUser({senha: e.target.value})}></input>
+                    <input type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,senha: e.target.value})} ></input>
                     <SCEntrarButton type='submit'>Entrar</SCEntrarButton>
                 </SCForm> 
             <SCLinkCadastro>Não tem uma conta? Cadastre-se!</SCLinkCadastro>

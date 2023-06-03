@@ -1,18 +1,21 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react';
 import styled from 'styled-components';
 import LoginPage from './components/LoginPage';
 import React from 'react';
-import { useAuth } from './providers/Auth';
+import { AuthContext } from './providers/Auth';
 
 function App() {
-  const {user, setUser} = useAuth();
-  console.log(user);
+  const [user , setUser] = useState({
+    name:"",
+    email:"",
+    senha:"" ,
+    foto:""
+  })
 
   return (
-    <>
-      <LoginPage/>
-      
-    </>
+      <AuthContext.Provider value={{user, setUser}}>
+        <LoginPage/>
+      </AuthContext.Provider>
   )
 }
 
