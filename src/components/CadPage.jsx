@@ -29,13 +29,13 @@ function CadPage(){
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Cadastrar}>
-                    <input disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
-                    <input disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
-                    <input disabled={postin} type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,name: e.target.value})}></input>
-                    <input disabled={postin} type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,image: e.target.value})}></input>
-                    <SCEntrarButton disabled={postin} type='submit'>Cadastrar</SCEntrarButton>
+                    <input data-test="email-input" disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
+                    <input data-test="user-name-input" disabled={postin} type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,name: e.target.value})}></input>
+                    <input data-test="user-image-input" disabled={postin} type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,image: e.target.value})}></input>
+                    <SCEntrarButton data-test="signup-btn" disabled={postin} type='submit'>Cadastrar</SCEntrarButton>
                 </SCForm> 
-            <Link to='/'>    
+            <Link data-test="login-link" to='/'>    
                 <SCLinkCadastro>Já tem uma conta? Faça login!</SCLinkCadastro>
             </Link>
        </SCLoginPage>

@@ -33,11 +33,11 @@ function LoginPage(){
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Login}>
-                    <input disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
-                    <input disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
-                    <SCEntrarButton disabled={postin} type='submit'>Entrar</SCEntrarButton>
+                    <input data-test="email-input" disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
+                    <SCEntrarButton data-test="login-btn" disabled={postin} type='submit'>Entrar</SCEntrarButton>
                 </SCForm>
-            <Link to='/cadastro'>     
+            <Link data-test="signup-link" to='/cadastro'>     
                 <SCLinkCadastro>Não tem uma conta? Cadastre-se!</SCLinkCadastro>
             </Link>
        </SCLoginPage>
