@@ -1,23 +1,41 @@
 import styled from 'styled-components';
 import Logo from './assets/logo.svg';
-import React, { useContext } from 'react';
+import React, { useContext , useState } from 'react';
 import { AuthContext } from '../providers/Auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginPage(){
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
+    const [postin, setPostin] = useState(false);
+    const navigate = useNavigate();
     
     function Login(event){
         event.preventDefault();
+        setPostin(true);
+        const postUser = {email: user.email , password: user.password }
+        const postURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
+        const promise = axios.post(postURL, postUser);
+        promise.catch((response)=>{
+            alert('Erro, por favor verifique se seus dados estão corretos');
+            console.log(response);
+            setPostin(false);
+        });
+        promise.then((response)=>{
+            setUser(response.data);
+            console.log(user);
+            navigate('/hoje');
+
+        });
     }
     return(
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Login}>
-                    <input type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
-                    <input type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,senha: e.target.value})} ></input>
-                    <SCEntrarButton type='submit'>Entrar</SCEntrarButton>
+                    <input disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
+                    <SCEntrarButton disabled={postin} type='submit'>Entrar</SCEntrarButton>
                 </SCForm>
             <Link to='/cadastro'>     
                 <SCLinkCadastro>Não tem uma conta? Cadastre-se!</SCLinkCadastro>

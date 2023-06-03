@@ -1,25 +1,39 @@
 import styled from 'styled-components';
 import Logo from './assets/logo.svg';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../providers/Auth';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 function CadPage(){
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
-    
+    const [postin, setPostin] = useState(false);
+    const navigate = useNavigate();
+
     function Cadastrar(event){
         event.preventDefault();
+        setPostin(true);
+        const postURL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+        const promise = axios.post(postURL, user);
+        promise.catch((response)=>{
+            alert('Erro, por favor verifique se seus dados estão corretos');
+            console.log(response);
+            setPostin(false);
+        });
+        promise.then(()=>{
+            navigate('/');
+        });
     }
     return(
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Cadastrar}>
-                    <input type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
-                    <input type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,senha: e.target.value})} ></input>
-                    <input type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,nome: e.target.value})}></input>
-                    <input type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,foto: e.target.value})}></input>
-                    <SCEntrarButton type='submit'>Cadastrar</SCEntrarButton>
+                    <input disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
+                    <input disabled={postin} type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,name: e.target.value})}></input>
+                    <input disabled={postin} type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,image: e.target.value})}></input>
+                    <SCEntrarButton disabled={postin} type='submit'>Cadastrar</SCEntrarButton>
                 </SCForm> 
             <Link to='/'>    
                 <SCLinkCadastro>Já tem uma conta? Faça login!</SCLinkCadastro>
