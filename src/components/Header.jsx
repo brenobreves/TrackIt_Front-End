@@ -6,9 +6,9 @@ import { AuthContext } from '../providers/Auth';
 function Header(){
     const {user, setUser} = useContext(AuthContext);
     return(
-        <SCHeader>
+        <SCHeader data-test="header">
                 <img src={Logo} />
-                <SCUserImg src={user.image}/>
+                <SCUserImg data-test="avatar" src={user.image}/>
         </SCHeader> 
     )
 }
