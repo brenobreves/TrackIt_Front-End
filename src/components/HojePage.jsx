@@ -13,8 +13,7 @@ function HojePage({setShowHeader}){
     const navigate = useNavigate();
 
     return(
-        <>
-            <Header/>           
+        <>          
         </>
     )
 }

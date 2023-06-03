@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import LoginPage from './components/LoginPage';
 import CadPage from './components/CadPage';
 import HojePage from './components/HojePage';
+import HistPage from './components/HistPage';
+import HabitPage from './components/HabitPage';
 import React from 'react';
 import { AuthContext } from './providers/Auth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -23,9 +25,11 @@ function App() {
         <BrowserRouter>
         {showHeader && <Header/>}
           <Routes>
-            <Route path='/' element={<LoginPage/>}/>
+            <Route path='/' element={<LoginPage setShowHeader={setShowHeader}/>}/>
             <Route path='/cadastro' element={<CadPage/>}/>
             <Route path='/hoje' element={<HojePage setShowHeader={setShowHeader}/>}/>
+            <Route path='/historico' element={<HistPage/>}/>
+            <Route path='/habitos' element={<HabitPage/>}/>
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>

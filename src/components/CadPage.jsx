@@ -35,7 +35,7 @@ function CadPage(){
                     <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
                     <input data-test="user-name-input" disabled={postin} type='text' placeholder='nome' required onChange={ (e) => setUser({...user ,name: e.target.value})}></input>
                     <input data-test="user-image-input" disabled={postin} type='text' placeholder='foto' required onChange={ (e) => setUser({...user ,image: e.target.value})}></input>
-                    <SCEntrarButton data-test="signup-btn" disabled={postin} type='submit'>
+                    <SCEntrarButton postin={postin} data-test="signup-btn" disabled={postin} type='submit'>
                         {postin ? <BeatLoader color='#FFFFFF'/> : 'Cadastrar'}
                     </SCEntrarButton>
                 </SCForm> 
@@ -75,6 +75,7 @@ const SCEntrarButton = styled.button`
     line-height: 26px;
     text-align: center;
     margin-bottom:25px;
+    opacity:${(props) => props.postin ? '0.5' : '1'}
 `;
 const SCLinkCadastro = styled.span`
     font-size: 13.976px;

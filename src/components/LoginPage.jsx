@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 
-function LoginPage(){
+function LoginPage({setShowHeader}){
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
     const [postin, setPostin] = useState(false);
@@ -28,6 +28,7 @@ function LoginPage(){
             console.log(user);
             setPostin(false);
             navigate('/hoje');
+            setShowHeader(true);
 
         });
     }
@@ -37,7 +38,7 @@ function LoginPage(){
                 <SCForm onSubmit={Login}>
                     <input data-test="email-input" disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
                     <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
-                    <SCEntrarButton data-test="login-btn" disabled={postin} type='submit'>
+                    <SCEntrarButton postin={postin} data-test="login-btn" disabled={postin} type='submit'>
                         {postin ? <BeatLoader color='#FFFFFF'/> : 'Entrar'}
                     </SCEntrarButton>
                 </SCForm>
@@ -77,6 +78,7 @@ const SCEntrarButton = styled.button`
     line-height: 26px;
     text-align: center;
     margin-bottom:25px;
+    opacity:${(props) => props.postin ? '0.5' : '1'}
 `;
 const SCLinkCadastro = styled.span`
     font-size: 13.976px;
