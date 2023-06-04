@@ -100,42 +100,42 @@ function HabitPage(){
         <SCHabitPage>
             <SCHeadlineBox>
                 <SCHeadline>Meus Hábitos</SCHeadline>
-                <SCAddHabitButton onClick={addHabit}>+</SCAddHabitButton>
+                <SCAddHabitButton data-test="habit-create-btn" onClick={addHabit}>+</SCAddHabitButton>
             </SCHeadlineBox>
             {showForm && 
-              <SCAddForm onSubmit={postHabit}>
-                <input disabled={postin} type='text' placeholder='nome do hábito' required value={newHabit.name} onChange={ (e) => setNewHabit({...newHabit ,name: e.target.value})}></input>
+              <SCAddForm data-test="habit-create-container" onSubmit={postHabit}>
+                <input data-test="habit-name-input" disabled={postin} type='text' placeholder='nome do hábito' required value={newHabit.name} onChange={ (e) => setNewHabit({...newHabit ,name: e.target.value})}></input>
                 <SCButContainer>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(0)} onClick={()=>addDay(0)}>D</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(1)} onClick={()=>addDay(1)}>S</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(2)} onClick={()=>addDay(2)}>T</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(3)} onClick={()=>addDay(3)}>Q</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(4)} onClick={()=>addDay(4)}>Q</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(5)} onClick={()=>addDay(5)}>S</SCFormButton>
-                  <SCFormButton type='button' disabled={postin} selected={newHabit.days.includes(6)} onClick={()=>addDay(6)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(0)} onClick={()=>addDay(0)}>D</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(1)} onClick={()=>addDay(1)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(2)} onClick={()=>addDay(2)}>T</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(3)} onClick={()=>addDay(3)}>Q</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(4)} onClick={()=>addDay(4)}>Q</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(5)} onClick={()=>addDay(5)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled={postin} selected={newHabit.days.includes(6)} onClick={()=>addDay(6)}>S</SCFormButton>
                 </SCButContainer>
                 <SCSubmitContainer>
-                <SCCancelButton type='button' disabled={postin} onClick={cancelSubmit}>Cancelar</SCCancelButton>
-                <SCSaveButton type='submit' disabled={postin} postin={postin}>{postin ? <BeatLoader color='#FFFFFF'/> : 'Salvar'}</SCSaveButton>
+                <SCCancelButton data-test="habit-create-cancel-btn" type='button' disabled={postin} onClick={cancelSubmit}>Cancelar</SCCancelButton>
+                <SCSaveButton data-test="habit-create-save-btn" type='submit' disabled={postin} postin={postin}>{postin ? <BeatLoader color='#FFFFFF'/> : 'Salvar'}</SCSaveButton>
                 </SCSubmitContainer>
               </SCAddForm>
             }
             {habits.map( (habito , index) => 
-              <SCHabitContainer key={habito.id}>
+              <SCHabitContainer data-test="habit-container" key={habito.id}>
               <SCInnerContainer>
-                <SCHabitName>{habito.name}</SCHabitName>
+                <SCHabitName data-test="habit-name">{habito.name}</SCHabitName>
                 <SCButContainer>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(0)}>D</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(1)}>S</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(2)}>T</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(3)}>Q</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(4)}>Q</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(5)}>S</SCFormButton>
-                  <SCFormButton type='button' disabled selected={habito.days.includes(6)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(0)}>D</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(1)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(2)}>T</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(3)}>Q</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(4)}>Q</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(5)}>S</SCFormButton>
+                  <SCFormButton data-test="habit-day" type='button' disabled selected={habito.days.includes(6)}>S</SCFormButton>
                 </SCButContainer>
               </SCInnerContainer>
               <SCDeleteHabitContainer>
-                <img src={TrashImg} onClick={() => deleteHabit(habito.id, index)}/>
+                <img data-test="habit-delete-btn" src={TrashImg} onClick={() => deleteHabit(habito.id, index)}/>
               </SCDeleteHabitContainer>
             </SCHabitContainer> 
              )} 

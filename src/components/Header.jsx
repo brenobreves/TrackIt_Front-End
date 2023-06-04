@@ -12,14 +12,14 @@ function Header(){
                 <img src={Logo} />
                 <SCUserImg data-test="avatar" src={user.image}/>
             </SCHeader> 
-            <SCMenuBox>
-                <SCMenuLink to='/habitos'>
+            <SCMenuBox data-test="menu">
+                <SCMenuLink data-test="habit-link" to='/habitos'>
                     <span>Hábitos</span>
                 </SCMenuLink>
-                <SCMenuLink to='/hoje'>
+                <SCMenuLink data-test="today-link" to='/hoje'>
                     <span>Hoje</span>
                 </SCMenuLink>
-                <SCMenuLink to='/historico'>
+                <SCMenuLink data-test="history-link" to='/historico'>
                     <span>Histórico</span>
                 </SCMenuLink>
             </SCMenuBox>
