@@ -48,6 +48,7 @@ const SCMenuBox = styled.div`
     display:flex;
     justify-content:space-evenly;
     align-items:center;
+    background-color:#FFFFFF;
 
 `;
 

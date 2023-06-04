@@ -7,10 +7,12 @@ import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 
 function LoginPage({setShowHeader}){
+    setShowHeader(false);
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
     const [postin, setPostin] = useState(false);
     const navigate = useNavigate();
+
     
     function Login(event){
         setPostin(true);
@@ -18,9 +20,9 @@ function LoginPage({setShowHeader}){
         const postUser = {email: user.email , password: user.password }
         const postURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
         const promise = axios.post(postURL, postUser);
-        promise.catch((response)=>{
-            alert('Erro, por favor verifique se seus dados estão corretos');
-            console.log(response);
+        promise.catch((erro)=>{
+            alert(erro.response.data.message);
+            console.log(erro.response);
             setPostin(false);
         });
         promise.then((response)=>{

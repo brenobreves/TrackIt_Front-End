@@ -6,7 +6,8 @@ import { Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 
-function CadPage(){
+function CadPage({setShowHeader}){
+    setShowHeader(false);
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
     const [postin, setPostin] = useState(false);
@@ -17,9 +18,9 @@ function CadPage(){
         event.preventDefault();
         const postURL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
         const promise = axios.post(postURL, user);
-        promise.catch((response)=>{
-            alert('Erro, por favor verifique se seus dados estão corretos');
-            console.log(response);
+        promise.catch((erro)=>{
+            alert(erro.response.data.message);
+            console.log(erro.response);
             setPostin(false);
         });
         promise.then(()=>{

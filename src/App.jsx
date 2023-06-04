@@ -11,14 +11,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
 function App() {
-  axios.defaults.headers.common['Authorization'] = '9maaDDkKFQ1saSPY3udlpWmT';
   const [user , setUser] = useState({
     name:"",
     email:"",
     password:"" ,
-    image:""
+    image:"" ,
   })
-  const [showHeader, setShowHeader] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
 
   return (
       <AuthContext.Provider value={{user, setUser}}>
@@ -26,8 +25,8 @@ function App() {
         {showHeader && <Header/>}
           <Routes>
             <Route path='/' element={<LoginPage setShowHeader={setShowHeader}/>}/>
-            <Route path='/cadastro' element={<CadPage/>}/>
-            <Route path='/hoje' element={<HojePage setShowHeader={setShowHeader}/>}/>
+            <Route path='/cadastro' element={<CadPage setShowHeader={setShowHeader}/>}/>
+            <Route path='/hoje' element={<HojePage/>}/>
             <Route path='/historico' element={<HistPage/>}/>
             <Route path='/habitos' element={<HabitPage/>}/>
           </Routes>

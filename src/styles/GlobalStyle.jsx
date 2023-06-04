@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
 		font-style: normal;
 		font-weight: 400;
 	}
+	input:focus { 
+    outline: none !important;
+    border-color: #126BA5;
+ }
 `
 
 export default GlobalStyle

@@ -5,8 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 
-function HojePage({setShowHeader}){
-    setShowHeader(true);
+function HojePage(){
     const {user, setUser} = useContext(AuthContext);
     console.log(user);
     const [postin, setPostin] = useState(false);
