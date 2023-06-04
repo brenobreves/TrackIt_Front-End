@@ -29,7 +29,6 @@ function HabitPage(){
     });
     promise.then((response)=>{
       setHabits(response.data);
-      console.log(habits);
       setPostin(false);
     });
   },[]);
@@ -44,14 +43,12 @@ function HabitPage(){
       const newDays = [...newHabit.days];
       const aux = newDays.splice(index,1);
       setNewHabit({...newHabit , days: newDays});
-      console.log(newHabit);
       return;
     }
     else{
       const newDays = [...newHabit.days];
       newDays.push(p);
       setNewHabit({...newHabit , days: newDays});
-      console.log(newHabit);
       return;
     }
   }
@@ -70,7 +67,6 @@ function HabitPage(){
     })
     promise.then((resp) => {
       const arrAux = [resp.data ,...habits];
-      console.log(arrAux);
       setHabits(arrAux);
       setPostin(false);
       setNewHabit({name:'' , days:[]});
@@ -89,7 +85,6 @@ function HabitPage(){
       console.log(erro.response.data);
     })
     promise.then(()=>{
-      console.log(`Hábito id: ${p} removido com sucesso`);
       const ArrAux = [...habits];
       const aux = ArrAux.splice(index,1);
       setHabits(ArrAux);

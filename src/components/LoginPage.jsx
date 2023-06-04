@@ -9,7 +9,6 @@ import { BeatLoader } from 'react-spinners';
 function LoginPage({setShowHeader}){
     setShowHeader(false);
     const {user, setUser} = useContext(AuthContext);
-    console.log(user);
     const [postin, setPostin] = useState(false);
     const navigate = useNavigate();
 
@@ -27,7 +26,6 @@ function LoginPage({setShowHeader}){
         });
         promise.then((response)=>{
             setUser(response.data);
-            console.log(user);
             setPostin(false);
             navigate('/hoje');
             setShowHeader(true);

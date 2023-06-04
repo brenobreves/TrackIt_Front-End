@@ -3,9 +3,14 @@ import Logo from './assets/logo-mini.svg';
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/Auth';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar , buildStyles } from 'react-circular-progressbar';
+import { PercentContext } from '../providers/Percent';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 function Header(){
     const {user, setUser} = useContext(AuthContext);
+    const {percent , setPercent} = useContext(PercentContext);
     return(
         <>
             <SCHeader data-test="header">
@@ -16,9 +21,14 @@ function Header(){
                 <SCMenuLink data-test="habit-link" to='/habitos'>
                     <span>Hábitos</span>
                 </SCMenuLink>
-                <SCMenuLink data-test="today-link" to='/hoje'>
-                    <span>Hoje</span>
-                </SCMenuLink>
+                <SCMenuLink2 data-test="today-link" to='/hoje'>
+                    <CircularProgressbar backgroundPadding={6} background={true} value={percent} text={`Hoje`} styles={buildStyles({
+                        pathColor:'#FFFFFF',
+                        backgroundColor:'#52B6FF',
+                        textColor:'#FFFFFF',
+                        trailColor:'#52B6FF'
+                    })}/>
+                </SCMenuLink2>
                 <SCMenuLink data-test="history-link" to='/historico'>
                     <span>Histórico</span>
                 </SCMenuLink>
@@ -28,6 +38,18 @@ function Header(){
 }
 
 export default Header;
+const SCMenuLink2 = styled(Link)`
+    width:91px;
+    height:91px;
+    font-family: 'Lexend Deca';
+	font-style: normal;
+	font-weight: 400;
+    text-decoration: none;
+    font-size: 17.976px;
+    line-height: 22px;
+    color:#52B6FF;
+    margin-bottom:50px;
+`;
 
 const SCMenuLink = styled(Link)`
     font-family: 'Lexend Deca';
