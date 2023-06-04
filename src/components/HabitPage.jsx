@@ -20,16 +20,13 @@ function HabitPage(){
   }
     
   useEffect( () => {
-    setPostin(true);
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
     const promise = axios.get(URL, config);
     promise.catch((erro) => {
       console.log(erro.response.data);
-      setPostin(false);
     });
     promise.then((response)=>{
       setHabits(response.data);
-      setPostin(false);
     });
   },[]);
 
@@ -136,7 +133,7 @@ function HabitPage(){
              )} 
             
 
-            {habits.length === 0 && !postin && <SCEmptyP>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</SCEmptyP>}
+            {habits.length === 0 && <SCEmptyP>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</SCEmptyP>}
         </SCHabitPage>
     )
 }

@@ -100,7 +100,7 @@ function HojePage(){
             <SCDiaP data-test="today">{diaFormat}</SCDiaP>
             {contDone === 0 ? <SCPorcentP data-test="today-counter" zero={true}>Nenhum hábito concluído ainda</SCPorcentP> : <SCPorcentP data-test="today-counter" zero={false}>{percent}% dos hábitos concluídos</SCPorcentP>}
             {habits.map( (habito) => 
-                <SCHabitContainer key={habito.id}>
+                <SCHabitContainer data-test="today-habit-container" key={habito.id}>
                     <SCHabitInnerContainer>
                         <SCHabitName data-test="today-habit-name">{habito.name}</SCHabitName>
                         <SCHabiSequence data-test="today-habit-sequence">Sequência Atual: <SCSequenceSpan done={habito.done}>{habito.currentSequence} dia{habito.currentSequence > 1 ? "s" :""}</SCSequenceSpan></SCHabiSequence>
