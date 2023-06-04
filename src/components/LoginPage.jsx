@@ -36,8 +36,8 @@ function LoginPage({setShowHeader}){
         <SCLoginPage>
             <SCLogo src={Logo}/>
                 <SCForm onSubmit={Login}>
-                    <input data-test="email-input" disabled={postin} type='text' placeholder='email' required onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
-                    <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
+                    <input data-test="email-input" disabled={postin} type='text' placeholder='email' required value={user.email} onChange={ (e) => setUser({...user ,email: e.target.value})}></input>
+                    <input data-test="password-input" disabled={postin} type='password' placeholder='senha' required value={user.password} onChange={ (e) => setUser({...user ,password: e.target.value})} ></input>
                     <SCEntrarButton postin={postin} data-test="login-btn" disabled={postin} type='submit'>
                         {postin ? <BeatLoader color='#FFFFFF'/> : 'Entrar'}
                     </SCEntrarButton>
